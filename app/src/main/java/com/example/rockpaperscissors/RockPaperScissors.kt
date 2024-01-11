@@ -1,45 +1,61 @@
 package com.example.rockpaperscissors
 
-fun main(){
-    var computerChoice = 1
-    var playerChoice = ""
+fun main() {
+    var exit = false
+    while (exit == false) {
 
-    println("Rock, Paper or Scissors?")
 
-    playerChoice = readln().uppercase()
-    computerChoice = (1..3).random()
+        var playerChoice = ""
+        var whileLoop = true
 
-    val rock = 1
-    val paper = 2
-    val scissors = 3
+        println("Rock Paper Scissors")
+        while (whileLoop) {
 
-    var playerWon = false
-    var playerDraw = false
+            playerChoice = readln().uppercase()
+            when {
+                playerChoice == "ROCK" -> whileLoop = false
+                playerChoice == "PAPER" -> whileLoop = false
+                playerChoice == "SCISSORS" -> whileLoop = false
+                else -> println("Please enter a valid choice")
+            }
 
-    if (playerChoice == "ROCK" && computerChoice == scissors){
-        playerWon = true;
-    }else if(playerChoice == "PAPER" && computerChoice == rock){
-        playerWon = true;
-    }else if(playerChoice == "SCISSORS" && computerChoice == paper){
-        playerWon = true;
-    }else
+        }
+        println("You entered $playerChoice")
 
-    if (playerChoice == "ROCK" && computerChoice == rock){
-        playerDraw = true;
-    }else if(playerChoice == "PAPER" && computerChoice == paper){
-        playerDraw = true;
-    }else if(playerChoice == "SCISSORS" && computerChoice == scissors){
-        playerDraw = true;
+        var randomNumber = (1..3).random()
+
+        var computerChoice = ""
+
+        when (randomNumber) {
+            1 -> computerChoice = "ROCK"
+            2 -> computerChoice = "PAPER"
+            3 -> computerChoice = "SCISSORS"
+        }
+
+        val winner = when {
+            playerChoice == computerChoice -> "TIE"
+            playerChoice == "ROCK" && computerChoice == "SCISSORS" -> "Player"
+            playerChoice == "PAPER" && computerChoice == "ROCK" -> "Player"
+            playerChoice == "SCISSORS" && computerChoice == "PAPER" -> "Player"
+            else -> "Computer"
+        }
+
+        println(
+            "Computer chose $computerChoice \n" +
+                    "Winner is $winner"
+        )
+
+        println(
+            "Do you want to continue playing? \n" +
+                    "Yes or No"
+        )
+
+        var exitChoice = readln().uppercase()
+        if (exitChoice == "YES") {
+            exit = false
+        }else{
+            exit = true
+        }
     }
-
-    if (playerWon == true && playerDraw == false){
-        println("You chose!")
-    }else if(playerWon == false && playerDraw == false){
-        println("You Lose!")
-    }else{
-        println("Draw")
-    }
-
-
 
 }
